@@ -1,6 +1,6 @@
 'use strict';
 
-importScripts('/sw-toolbox.js');
+importScripts('https://github.com/ALdnoah7/kidsfm/blob/main/sw-toolbox.js');
 
 toolbox.precache(["kidsfm/index.html","kidsfm/style/style.css"]);
 
