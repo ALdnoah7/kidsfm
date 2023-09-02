@@ -22,7 +22,13 @@
 <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
 <meta name="theme-color" content="#E6E6FA">
 
+<script src="https://cdn.jsdelivr.net/npm/@davland7/rplayer/dist/rplayer.min.js"></script>
+
 <script>
+const audio = new Audio('https://listen3.myradio24.com/73352');
+var playing = 0;
+var volumeAmount = 0.5;
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
@@ -36,6 +42,15 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
+<script>
+function ChangeVolume() {
+	volumeAmount = document.getElementById("Slider").value;
+	if (playing > 0) {
+	audio.volume = volumeAmount;
+	}
+}
+</script>
+
   <title>Web Community Leads</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <link rel="stylesheet" href="style/style.css">
@@ -44,11 +59,6 @@ if ('serviceWorker' in navigator) {
 <body>
   <div class="container">
     <div class="box">
-      <h1>Web Community Leads UK and IE</h1>
-      <br>
-      <p>Web Community Leads UK and IE is a network of people who run meet up groups or similar events focused around web technologies.
-      <br>It exists to help event organisers to share resources and ask for advice when needed.</p>
-
       <h3>How to get involved</h3>
       <ol>
         <li>Read though our <a href="https://github.com/webcommunityukie/Code-of-Conduct"><i class="fa fa-bolt"></i> Code of Conduct</a>.</li>
@@ -59,7 +69,13 @@ if ('serviceWorker' in navigator) {
       <footer>
         <a href="https://github.com/webcommunityukie/webcommunityukie.github.io">Code on GitHub</a>
         <a href="http://goldsmiths.tech">Inspired by Hacksmiths</a>
-      </footer>
+      <footer>
+	<button onclick="
+		if (playing > 0) { audio.volume = 0; playing = 0; }
+		else { audio.play(); audio.volume = volumeAmount; playing = 1; }"
+	>Камнуть</button>
+      <footer>
+	<input type="range" id = "Slider" min="0" max="1" value="0.5" step="any" onchange="ChangeVolume()"></input>
     </div>
   </div>
 </body>
